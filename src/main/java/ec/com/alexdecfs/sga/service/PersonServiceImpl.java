@@ -6,7 +6,7 @@ import java.util.List;
 import javax.ejb.Stateless;
 
 @Stateless
-public class PersonServiceImpl implements PersonServiceRemote{
+public class PersonServiceImpl implements PersonServiceRemote, PersonService{
 
     @Override
     public List<Person> listPersons() {
