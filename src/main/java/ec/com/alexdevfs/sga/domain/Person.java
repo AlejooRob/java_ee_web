@@ -1,10 +1,18 @@
 package ec.com.alexdevfs.sga.domain;
 
 import java.io.Serializable;
-import javax.persistence.Entity;
 import javax.persistence.*;
 
 @Entity
+@NamedQueries(
+        {
+            @NamedQuery(
+                    name="Person.findAll", 
+                    query="SELECT p FROM Person p ORDER BY p.personId"
+            )
+        }
+)
+@Table(name="person")
 public class Person implements Serializable{
     
     private static final long serialVersionUID = 1L;
