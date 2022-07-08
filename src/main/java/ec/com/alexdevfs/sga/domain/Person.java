@@ -1,11 +1,17 @@
 package ec.com.alexdevfs.sga.domain;
 
 import java.io.Serializable;
+import javax.persistence.Entity;
+import javax.persistence.*;
 
+@Entity
 public class Person implements Serializable{
     
     private static final long serialVersionUID = 1L;
     
+    @Id
+    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @Column(name="id_persona")
     private int personId;
     private String firstName;
     private String lastName;
@@ -13,6 +19,13 @@ public class Person implements Serializable{
     private String phone;
 
     public Person() {
+    }
+
+    public Person(String firstName, String lastName, String email, String phone) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.phone = phone;
     }
 
     public Person(int personId, String firstName, String lastName, String email, String phone) {
