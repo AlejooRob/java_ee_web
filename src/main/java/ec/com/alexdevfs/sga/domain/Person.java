@@ -12,7 +12,7 @@ import javax.persistence.*;
             )
         }
 )
-@Table(name="person")
+@Table(name="persona")
 public class Person implements Serializable{
     
     private static final long serialVersionUID = 1L;
@@ -21,9 +21,17 @@ public class Person implements Serializable{
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     @Column(name="id_persona")
     private int personId;
+    
+    @Column(name="nombre")
     private String firstName;
+    
+    @Column(name="apellido")
     private String lastName;
+    
+    @Column(name="email", unique = true)
     private String email;
+    
+    @Column(name="telefono")
     private String phone;
 
     public Person() {
