@@ -1,38 +1,44 @@
 package ec.com.alexdevfs.sga.domain;
 
 import java.io.Serializable;
+import java.util.List;
 import javax.persistence.*;
+import javax.validation.constraints.Size;
+
 
 @Entity
-@NamedQueries(
-        {
-            @NamedQuery(
-                    name="Person.findAll", 
-                    query="SELECT p FROM Person p ORDER BY p.personId"
-            )
-        }
-)
-@Table(name="persona")
-public class Person implements Serializable{
-    
+@Table(name = "persona")
+@NamedQueries({
+    @NamedQuery(name = "Person.findAll", query = "SELECT p FROM Person p"),
+    @NamedQuery(name = "Person.findByIdPersona", query = "SELECT p FROM Person p WHERE p.idPersona = :idPersona"),
+    @NamedQuery(name = "Person.findByNombre", query = "SELECT p FROM Person p WHERE p.firstName = :nombre"),
+    @NamedQuery(name = "Person.findByApellido", query = "SELECT p FROM Person p WHERE p.lastName = :apellido"),
+    @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email"),
+    @NamedQuery(name = "Person.findByTelefono", query = "SELECT p FROM Person p WHERE p.phone = :telefono")})
+public class Person implements Serializable {
+
     private static final long serialVersionUID = 1L;
     
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
-    @Column(name="id_persona")
-    private int personId;
-    
-    @Column(name="nombre")
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+    @Column(name = "id_persona")
+    private Integer idPersona;
+    @Size(max = 45)
+    @Column(name = "nombre")
     private String firstName;
-    
-    @Column(name="apellido")
+    @Size(max = 45)
+    @Column(name = "apellido")
     private String lastName;
-    
-    @Column(name="email", unique = true)
+    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Size(max = 45)
     private String email;
-    
-    @Column(name="telefono")
+    @Size(max = 45)
+    @Column(name = "telefono")
     private String phone;
+    
+    @OneToMany(mappedBy = "person")
+    private List<User> userList;
 
     public Person() {
     }
@@ -43,21 +49,17 @@ public class Person implements Serializable{
         this.email = email;
         this.phone = phone;
     }
-
-    public Person(int personId, String firstName, String lastName, String email, String phone) {
-        this.personId = personId;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.email = email;
-        this.phone = phone;
+    
+    public Person(Integer idPersona) {
+        this.idPersona = idPersona;
     }
 
-    public int getPersonId() {
-        return personId;
+    public Integer getPersonId() {
+        return idPersona;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setPersonId(Integer idPersona) {
+        this.idPersona = idPersona;
     }
 
     public String getFirstName() {
@@ -93,9 +95,28 @@ public class Person implements Serializable{
     }
 
     @Override
-    public String toString() {
-        return "Person{" + "personId=" + personId + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + '}';
+    public int hashCode() {
+        int hash = 0;
+        hash += (idPersona != null ? idPersona.hashCode() : 0);
+        return hash;
     }
-    
+
+    @Override
+    public boolean equals(Object object) {
+        // TODO: Warning - this method won't work in the case the id fields are not set
+        if (!(object instanceof Person)) {
+            return false;
+        }
+        Person other = (Person) object;
+        if ((this.idPersona == null && other.idPersona != null) || (this.idPersona != null && !this.idPersona.equals(other.idPersona))) {
+            return false;
+        }
+        return true;
+    }
+
+    @Override
+    public String toString() {
+        return "Person{" + "idPersona=" + idPersona + ", firstName=" + firstName + ", lastName=" + lastName + ", email=" + email + ", phone=" + phone + '}';
+    }
     
 }

@@ -2,9 +2,7 @@
 <persistence version="2.2" xmlns="http://java.sun.com/xml/ns/persistence" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence http://xmlns.jcp.org/xml/ns/persistence/persistence_2_2.xsd">
   <!-- Define Persistence Unit -->
   <persistence-unit name="PersonPU" transaction-type="JTA">
-      
-      <jta-data-source>jdbc/PersonDb</jta-data-source>
-      
+    <jta-data-source>jdbc/PersonDb</jta-data-source>
     <!--
     <class>ec.com.alexdevfs.sga.domain.Person</class>
     <properties>
@@ -16,5 +14,8 @@
         <property name="eclipselink.loggin.parameters" value="true" />
     </properties>
     -->
+    <class>ec.com.alexdevfs.sga.domain.Person</class>
+    <class>ec.com.alexdevfs.sga.domain.Usuario</class>
+    <class>ec.com.alexdevfs.sga.domain.User</class>
   </persistence-unit>
 </persistence>
