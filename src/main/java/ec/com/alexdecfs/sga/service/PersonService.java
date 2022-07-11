@@ -6,11 +6,12 @@ import javax.ejb.Local;
 
 @Local
 public interface PersonService {
+    
     public List<Person> listPersons();
     
     public Person findPersonById(Person person);
     
-    public Person findersonByEmail(Person persin);
+    public Person findersonByEmail(Person person);
     
     public void registerPerson(Person person);
     

@@ -3,7 +3,7 @@
   <!-- Define Persistence Unit -->
   <persistence-unit name="PersonPU" transaction-type="JTA">
     <jta-data-source>jdbc/PersonDb</jta-data-source>
-    <!--
+    <!-- 
     <class>ec.com.alexdevfs.sga.domain.Person</class>
     <properties>
         <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/test?useSSL=false&amp;useTimezone=true&amp;serverTimezone=UTC" />
