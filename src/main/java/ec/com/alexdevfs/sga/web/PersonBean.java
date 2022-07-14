@@ -1,6 +1,6 @@
 package ec.com.alexdevfs.sga.web;
 
-import ec.com.alexdecfs.sga.service.PersonService;
+import ec.com.alexdevfs.sga.service.PersonService;
 import ec.com.alexdevfs.sga.domain.Person;
 import java.util.List;
 import javax.annotation.PostConstruct;

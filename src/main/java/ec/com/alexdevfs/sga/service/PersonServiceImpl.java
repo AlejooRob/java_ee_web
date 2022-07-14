@@ -1,13 +1,15 @@
-package ec.com.alexdecfs.sga.service;
+package ec.com.alexdevfs.sga.service;
 
 import ec.com.alexdevfs.sga.data.PersonDao;
 import ec.com.alexdevfs.sga.domain.Person;
 import java.util.List;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import javax.jws.WebService;
 
 @Stateless
-public class PersonServiceImpl implements PersonServiceRemote, PersonService{
+@WebService(endpointInterface = "ec.com.alexdevfs.sga.service.PersonServiceWs")
+public class PersonServiceImpl implements PersonServiceRemote, PersonService, PersonServiceWs {
     
     @Inject
     private PersonDao personDao;

@@ -1,4 +1,4 @@
-package ec.com.alexdecfs.sga.service;
+package ec.com.alexdevfs.sga.service;
 
 import ec.com.alexdevfs.sga.domain.User;
 import java.util.List;

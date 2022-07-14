@@ -3,7 +3,8 @@ package ec.com.alexdevfs.sga.domain;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
-import javax.validation.constraints.Size;
+import javax.validation.constraints.*;
+import javax.xml.bind.annotation.*;
 
 
 @Entity
@@ -15,6 +16,7 @@ import javax.validation.constraints.Size;
     @NamedQuery(name = "Person.findByApellido", query = "SELECT p FROM Person p WHERE p.lastName = :apellido"),
     @NamedQuery(name = "Person.findByEmail", query = "SELECT p FROM Person p WHERE p.email = :email"),
     @NamedQuery(name = "Person.findByTelefono", query = "SELECT p FROM Person p WHERE p.phone = :telefono")})
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -30,13 +32,14 @@ public class Person implements Serializable {
     @Size(max = 45)
     @Column(name = "apellido")
     private String lastName;
-    // @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")//if the field contains email address consider using this annotation to enforce field validation
+    @Pattern(regexp="[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?", message="Invalid email")
     @Size(max = 45)
     private String email;
     @Size(max = 45)
     @Column(name = "telefono")
     private String phone;
     
+    @XmlTransient
     @OneToMany(mappedBy = "person", cascade = CascadeType.ALL)
     private List<User> userList;
 
